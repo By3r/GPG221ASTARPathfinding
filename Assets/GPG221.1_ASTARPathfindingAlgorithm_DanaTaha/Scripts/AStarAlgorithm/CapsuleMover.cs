@@ -23,7 +23,7 @@ namespace AStarPathFinding.PathFinder
 
         private List<Node> _path;
         private int _targetIndex = 0;
-        private bool _isMoving = false;
+        // private bool _isMoving = false;
         private Vector3 _lastEndPoint;
         #endregion
 
@@ -51,7 +51,7 @@ namespace AStarPathFinding.PathFinder
 #if ASTAR_ALGORITHMDEBUG
         private IEnumerator FollowPath()
         {
-            _isMoving = true;
+           // _isMoving = true;
 
             while (true)
             {
@@ -63,7 +63,7 @@ namespace AStarPathFinding.PathFinder
 
                 if (_targetIndex >= _path.Count)
                 {
-                    _isMoving = false;
+                    // _isMoving = false;
                     yield return null;
                     continue;
                 }
