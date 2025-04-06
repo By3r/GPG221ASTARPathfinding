@@ -13,16 +13,19 @@ namespace GOAP.Planner
             List<GOAP.Actions.Action> bestPlan = null;
             float bestCost = float.MaxValue;
 
+            #region pushes plan node to a stack and tracks visited states using hashed string version of world states
             var stack = new Stack<PlanNode>();
             var visited = new HashSet<string>();
             stack.Push(new PlanNode(worldState, new List<GOAP.Actions.Action>(), 0f));
             visited.Add(GetStateKey(worldState));
+            #endregion
 
+            #region As long as the stack isn't empty, check if the goal is satisfied
             int iter = 0, maxIter = 10000;
             while (stack.Count > 0 && iter++ < maxIter)
             {
                 var node = stack.Pop();
-
+                #region if the goal is met and the cost was cheaper than any of the other plans, save the plan
                 if (GoalSatisfied(node.state, goal))
                 {
                     if (node.cost < bestCost)
@@ -32,7 +35,9 @@ namespace GOAP.Planner
                     }
                     continue;
                 }
+                #endregion
 
+                #region loop through all available actions to see what else can be done
                 foreach (var action in availableActions)
                 {
                     if (!action.ArePreconditionsMet(node.state))
@@ -54,13 +59,15 @@ namespace GOAP.Planner
                     var plan = new List<GOAP.Actions.Action>(node.plan) { action };
                     stack.Push(new PlanNode(newState, plan, cost));
                 }
+                #endregion
             }
+            #endregion
 
 #if DEBUG_PLAN
-                if (bestPlan == null) Debug.Log("[Planner] No valid plan.");
+                if (bestPlan == null) Debug.Log("[Planner Line 67] No valid plan.");
                 else
                 {
-                    Debug.Log($"[Planner] Best plan (cost={bestCost}, steps={bestPlan.Count}):");
+                    Debug.Log($"[Planner Line 70] Best plan (cost={bestCost}, steps={bestPlan.Count}):");
                     for (int i = 0; i < bestPlan.Count; i++)
                         Debug.Log($"    {i + 1}. {bestPlan[i].actionName}");
                 }

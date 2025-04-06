@@ -186,7 +186,7 @@ public class CatGOAP : MonoBehaviour
         var goalEffects = new Dictionary<string, bool>();
         switch (goal)
         {
-            #region Get an action that eventually has the corresponding effect as true
+            #region Goals and what effects they have.
             case GoalType.Rest:
                 goalEffects["isPlayful"] = true;
                 break;

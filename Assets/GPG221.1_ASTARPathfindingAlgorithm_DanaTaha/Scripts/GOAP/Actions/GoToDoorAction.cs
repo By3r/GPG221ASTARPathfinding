@@ -24,7 +24,7 @@ namespace GOAP.Actions
 
         public override bool ExecuteAction()
         {
-            Debug.Log("[GoToDoor] (stub) Cat moves to the door.");
+            Debug.Log("Cat moves to the door.");
             return true;  
         }
     }

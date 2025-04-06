@@ -676,7 +676,7 @@ MonoBehaviour:
   mover: {fileID: 641189764}
   laserMover: {fileID: 1183428237}
   planner: {fileID: 59054141}
-  currentGoal: 0
+  currentGoal: 3
   lastPlan: []
   currentAction: 
   goalTimeoutDuration: 5
