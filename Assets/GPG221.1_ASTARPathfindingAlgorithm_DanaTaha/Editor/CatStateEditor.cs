@@ -1,12 +1,13 @@
 #if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
+using Gameplay;
 using GOAP.WorldStates;
+using UnityEditor;
+using UnityEngine;
 
 namespace Editors
 {
-    [CustomEditor(typeof(WorldState))]
-    public class WorldStateEditor : Editor
+    [CustomEditor(typeof(CatState))]
+    public class CatStateEditor : Editor
     {
         public override void OnInspectorGUI()
         {
@@ -14,17 +15,16 @@ namespace Editors
             DrawDefaultInspector();
             #endregion
 
-            #region  Get a reference to the WorldState instance
-            WorldState worldState = (WorldState)target;
+            #region  Get a reference to the CatState script
+            CatState catState = (CatState)target;
             #endregion
 
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("World State Facts", EditorStyles.boldLabel);
 
             #region Check if there are any facts to display
-            if (worldState.facts != null && worldState.facts.Count > 0)
+            if (catState.facts != null && catState.facts.Count > 0)
             {
-                foreach (var fact in worldState.facts)
+                foreach (var fact in catState.facts)
                 {
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField(fact.Key, GUILayout.MaxWidth(150));
@@ -34,7 +34,7 @@ namespace Editors
             }
             else
             {
-                EditorGUILayout.LabelField("No global facts available.");
+                EditorGUILayout.LabelField("No cat facts available.");
             }
             #endregion
 
@@ -46,5 +46,5 @@ namespace Editors
             #endregion
         }
     }
-#endif
 }
+#endif
